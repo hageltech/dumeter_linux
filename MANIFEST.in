@@ -1,0 +1,3 @@
+include *.txt
+include *.conf
+recursive-include src dumeter-reporter *.py

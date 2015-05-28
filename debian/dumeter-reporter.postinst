@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = configure ]; then
+    if ! getent passwd dureporter >/dev/null; then
+        adduser --quiet --system --no-create-home --home /var/lib/dumeter-reporter --shell /usr/sbin/nologin dureporter
+        chown dureporter /var/lib/dumeter-reporter
+    fi
+fi
+
+#DEBHELPER#
+
+exit 0

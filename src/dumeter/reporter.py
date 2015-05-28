@@ -13,7 +13,7 @@ from dumeter.logger import logger
 from dumeter.interfacecollector import InterfaceCollector
 from dumeter.dumeter_net import DuMeterNetSender
 
-class Reporter:
+class Reporter(object):
     """ This class integrates the collection/reporting that is done in other classes """
 
     # *****************************************************************************************************************
@@ -22,7 +22,7 @@ class Reporter:
         self.config = config
         self.recordkeeper = recordkeeper
         self.collector = InterfaceCollector(config.interface(self.name))
-        if self.collector.device == None:
+        if self.collector.device is None:
             logger().critical('Network interface name is not configured for reporter %s', name)
             sys.exit()
         if not (self.collector.device in InterfaceCollector.available_devices()):

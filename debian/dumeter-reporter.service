@@ -1,0 +1,12 @@
+[Unit]
+Description=dumeter.net network bandwidth usage reporter
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/dumeter-reporter
+User=dureporter
+
+[Install]
+WantedBy=multi-user.target

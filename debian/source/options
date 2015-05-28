@@ -1,0 +1,1 @@
+extend-diff-ignore="\.egg-info|MANIFEST|MANIFEST.in|redhat|build-deb\.sh|\.idea"

@@ -12,7 +12,7 @@ import urllib2
 import dumeter
 from dumeter.logger import logger
 
-class DuMeterNetSender:
+class DuMeterNetSender(object):
     """ This class communicates with dumeter.net service """
 
     PREFIX = 'http://dumeter.net/token/data.csv?'
@@ -36,14 +36,15 @@ class DuMeterNetSender:
     def report(self, token, data):
         """ sent data (which is expected to already be in CSV format) to dumeter.net, using the given token """
         try:
-            if not token: raise dumeter.DuMeterError('Token is not set in the configuration file')
+            if not token or (token == 'REPLACE-WITH-YOUR-DUMETER-NET-LINK-CODE'):
+                raise dumeter.DuMeterError('link_code in configuration file is not set. See configuration file for instructions.')
             request = urllib2.Request(self.__url(token), self.__body(data))
             handler = urllib2.urlopen(request)
             if handler.getcode() != 200:
                 raise dumeter.DuMeterError('Invalid reply from dumeter.net: %d' % handler.getcode())
             return True
-        except IOError, e:
-            logger().error('Reporting to dumeter.net has failed: %s', [str(e)])
+        except IOError, exc:
+            logger().error('Reporting to dumeter.net has failed: %s', [str(exc)])
             return False
 
 

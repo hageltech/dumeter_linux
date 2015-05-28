@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+case $1 in
+    purge)
+        rm -f /var/lib/dumeter-reporter/db.sqlite
+        rmdir --ignore-fail-on-non-empty /etc/ssh
+        if which deluser >/dev/null 2>&1; then
+            deluser --quiet dureporter > /dev/null || true
+        fi
+        ;;
+esac
+
+exit 0

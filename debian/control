@@ -1,0 +1,28 @@
+Source: dumeter-reporter
+Section: admin
+Priority: optional
+Maintainer: Haim Gelfenbeyn <admin@hageltech.com>
+Build-Depends:
+  python-all (>= 2.6.6-3~),
+  debhelper (>= 7.4.3),
+  dh-systemd (>= 1.5),
+  dh-python,
+  adduser
+Standards-Version: 3.9.5
+Homepage: https://www.dumeter.net/
+
+
+Package: dumeter-reporter
+Architecture: all
+Suggests: python-setproctitle
+Depends:
+  ${misc:Depends},
+  ${python:Depends},
+  adduser
+XS-Python-Version: current, >= 2.7
+Description: Network bandwidth usage reporter for dumeter.net service.
+ Reports hourly network totals to dumeter.net.
+ dumeter.net provides a comprehensive view of your
+ Internet bandwidth utilization, across all your computers.
+ Avoid overage charges, throttling, and other "niceties"
+ of capped or metered Internet connection.

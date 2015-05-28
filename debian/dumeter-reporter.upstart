@@ -1,0 +1,14 @@
+# dumeter-reporter
+#
+# Network bandwidth usage reporter for dumeter.net service.
+
+description	"Network bandwidth usage reporter for dumeter.net service"
+
+start on started network-services
+stop on stopping network-services
+
+setuid dureporter
+umask 022
+console none
+
+exec /usr/sbin/dumeter-reporter

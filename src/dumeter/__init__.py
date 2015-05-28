@@ -12,15 +12,18 @@ __license__ = "MPL 2.0"
 __email__ = "support@hageltech.com"
 
 NAME = 'dumeter-reporter'
-VERSION = '1.0b'
+VERSION = '1.0'
 DB_VERSION = 1
 
+# Some common constants
 DEFAULT_DATABASE_PATH = '/var/lib/' + NAME + '/db.sqlite'
 DEFAULT_CONF_PATH = '/etc/' + NAME + '.conf'
-REPORT_FREQUENCY = 120*60 # How often to report to dumeter.net, in seconds.
-SLEEP_BETWEEN_UPDATES = 60 # How often to collect statistics, in seconds.
-DEBUG = True
+# How often to collect statistics, in seconds.
+SLEEP_BETWEEN_UPDATES = 60
+# How often to report to dumeter.net, in seconds.
+REPORT_FREQUENCY = 120 * SLEEP_BETWEEN_UPDATES
 
 class DuMeterError(IOError):
+    """ dumeter-reporter-specific error messages """
     pass
 

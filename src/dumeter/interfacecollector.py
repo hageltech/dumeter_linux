@@ -14,7 +14,7 @@ from dumeter.logger import logger
 # TODO: Support per-IP statistics from iptables counters, see: https://github.com/ldx/python-iptables
 # TODO: Support SNMP statistics of remote machines
 
-class InterfaceCollector:
+class InterfaceCollector(object):
     """
         Collects rx/tx statistics for an interface
         Warning: this code is not portable, Linux-only.
@@ -59,11 +59,12 @@ class InterfaceCollector:
         """ Update rx/tx network interface statistics for an interface """
         sent_new = self.__getstat(self.STAT_SENT)
         recv_new = self.__getstat(self.STAT_RECV)
-        if sent_new < self.sent_init: self.sent_init = sent_new
-        if recv_new < self.recv_init: self.recv_init = recv_new
+        if sent_new < self.sent_init:
+            self.sent_init = sent_new
+        if recv_new < self.recv_init:
+            self.recv_init = recv_new
         self.sent = sent_new - self.sent_init
         self.recv = recv_new - self.recv_init
         self.sent_init = sent_new
         self.recv_init = recv_new
-        if dumeter.DEBUG:
-            logger().debug('Updated stats for %s: sent=%d, recv=%d' % (self.device, self.sent, self.recv))
+        logger().debug('Updated stats for %s: sent=%d, recv=%d', self.device, self.sent, self.recv)

@@ -13,22 +13,22 @@ import datetime
 import dumeter
 from dumeter.logger import logger
 
-class RecordKeeper:
+class RecordKeeper(object):
     """ This class keeps records in the database, for later submission to dumeter.net """
 
     # *****************************************************************************************************************
     def __init__(self, config):
         try:
             self.con = sqlite3.connect(config.database_file(), detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
-        except sqlite3.OperationalError, e:
-            logger().critical('Error opening database file "%s": %s', config.database_file(), str(e))
+        except sqlite3.OperationalError, exc:
+            logger().critical('Error opening database file "%s": %s', config.database_file(), str(exc))
             sys.exit(1)
         self.con.row_factory = sqlite3.Row
         try:
             self.con.execute('CREATE TABLE config (version INTEGER)')
         except sqlite3.OperationalError:
             cur = self.con.execute('SELECT version FROM config')
-            if (cur.fetchone()[0] == dumeter.DB_VERSION):
+            if cur.fetchone()[0] == dumeter.DB_VERSION:
                 return
             else:
                 raise dumeter.DuMeterError('Invalid database version')
@@ -54,7 +54,7 @@ class RecordKeeper:
         try:
             self.con.execute('INSERT or FAIL INTO stats (reporter,dt,sent,recv,reported) VALUES (?,?,?,?,0)', [reporter, dt, sent, recv])
         except sqlite3.IntegrityError:
-            self.con.execute('UPDATE stats SET sent=sent+?, recv=recv+?, reported=0 WHERE reporter=? AND dt=?',[sent, recv, reporter, dt])
+            self.con.execute('UPDATE stats SET sent=sent+?, recv=recv+?, reported=0 WHERE reporter=? AND dt=?', [sent, recv, reporter, dt])
         self.con.commit()
 
     # *****************************************************************************************************************

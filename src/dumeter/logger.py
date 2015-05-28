@@ -12,6 +12,8 @@ import logging
 import logging.handlers
 import dumeter
 
+global_logger = None
+
 # *****************************************************************************************************************
 def setupLogging():
     """
@@ -29,7 +31,7 @@ def setupLogging():
         cons.setFormatter(formatter)
         logr.addHandler(cons)
     # Set up the normal syslog logger
-    syslog = logging.handlers.SysLogHandler(address='/dev/log',facility=logging.handlers.SysLogHandler.LOG_DAEMON)
+    syslog = logging.handlers.SysLogHandler(address='/dev/log', facility=logging.handlers.SysLogHandler.LOG_DAEMON)
     formatter = logging.Formatter('%(asctime)s %(name)s: %(levelname)s: %(message)s', '%b %e %H:%M:%S')
     syslog.setFormatter(formatter)
     logr.addHandler(syslog)
@@ -39,6 +41,6 @@ def setupLogging():
 def logger():
     """ Convenience method to get the default logger in other modules. """
     global global_logger
-    if not ('global_logger' in globals()):
+    if global_logger is None:
         global_logger = setupLogging()
     return global_logger

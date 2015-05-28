@@ -1,0 +1,12 @@
+Format-Specification: http://wiki.debian.org/Proposals/CopyrightFormat?action=recall&rev=178
+Upstream-Name: dumeter-reporter
+Upstream-Maintainer: Haim Gelfenbeyn <admin@hageltech.com>
+Upstream-Source: https://www.dumeter.net/
+
+Files: *
+Copyright: Copyright 2014-2015 Hagel Technologies Ltd.
+License: MPL-2.0
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+

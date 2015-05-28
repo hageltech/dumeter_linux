@@ -10,13 +10,14 @@
 import dumeter
 import ConfigParser
 
-class Config:
+class Config(object):
     """ Parses/reads configuration file, ensures sensible defaults """
 
     # *****************************************************************************************************************
     def __init__(self, path=None):
         self.config = ConfigParser.ConfigParser()
-        if path == None: path = dumeter.DEFAULT_CONF_PATH
+        if path == None:
+            path = dumeter.DEFAULT_CONF_PATH
         self.path = path
         self.config.read(self.path)
 
@@ -24,7 +25,8 @@ class Config:
     def reporters(self):
         """ List of all reporters in the config file """
         result = self.config.sections()
-        if 'global' in result: result.remove('global')
+        if 'global' in result:
+            result.remove('global')
         return result
 
     # *****************************************************************************************************************

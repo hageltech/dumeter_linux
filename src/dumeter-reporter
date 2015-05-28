@@ -1,4 +1,4 @@
-#!/usr/bin/python -Es
+#!/usr/bin/python -Es3
 """
     This file is part of dumeter.net network traffic reporter for Linux.
     Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
@@ -15,6 +15,8 @@ __email__ = "support@hageltech.com"
 import sys
 import time
 import argparse
+
+sys.path.insert(0,'/usr/share/dumeter-reporter')
 import dumeter
 from dumeter.config import Config
 from dumeter.recordkeeper import RecordKeeper
@@ -52,7 +54,7 @@ if __name__ == "__main__":
             time.sleep(dumeter.SLEEP_BETWEEN_UPDATES)
             for reporter in reporters: reporter.update()
             report_counter += 1
-            if report_counter >= dumeter.REPORT_FREQUENCY / dumeter.SLEEP_BETWEEN_UPDATES:
+            if report_counter >= dumeter.REPORT_FREQUENCY // dumeter.SLEEP_BETWEEN_UPDATES:
                 report_counter = 0
                 for reporter in reporters: reporter.send_report()
     except KeyboardInterrupt:
