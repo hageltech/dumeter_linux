@@ -1,12 +1,24 @@
+"""
+    This file is part of dumeter.net network traffic reporter for Linux.
+    Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
 
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+
+import os
 import dumeter
 from dumeter.logger import logger
-import sys
-import os
 
 # TODO: Support per-IP statistics from iptables counters, see: https://github.com/ldx/python-iptables
+# TODO: Support SNMP statistics of remote machines
 
 class InterfaceCollector:
+    """
+        Collects rx/tx statistics for an interface
+        Warning: this code is not portable, Linux-only.
+    """
 
     sent_init = 0
     recv_init = 0
@@ -17,6 +29,7 @@ class InterfaceCollector:
     STAT_SENT = 'tx_bytes'
     STAT_RECV = 'rx_bytes'
 
+    # *****************************************************************************************************************
     @classmethod
     def available_devices(cls):
         """ Set of all available network devices """
@@ -32,14 +45,18 @@ class InterfaceCollector:
         self.update_stats()
         self.update_stats()
 
+    # *****************************************************************************************************************
     def __getstat(self, statname):
+        """ Get network interface statistics """
         try:
             with open('/sys/class/net/%s/statistics/%s' % (self.device, statname)) as statfile:
                 return int(statfile.read().strip())
         except IOError:
             return 0
 
+    # *****************************************************************************************************************
     def update_stats(self):
+        """ Update rx/tx network interface statistics for an interface """
         sent_new = self.__getstat(self.STAT_SENT)
         recv_new = self.__getstat(self.STAT_RECV)
         if sent_new < self.sent_init: self.sent_init = sent_new

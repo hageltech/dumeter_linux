@@ -1,8 +1,16 @@
+"""
+    This file is part of dumeter.net network traffic reporter for Linux.
+    Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
 
-import dumeter
-from dumeter.logger import logger
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+
 import urllib
 import urllib2
+import dumeter
+from dumeter.logger import logger
 
 class DuMeterNetSender:
     """ This class communicates with dumeter.net service """

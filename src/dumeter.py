@@ -1,13 +1,25 @@
-#!/usr/bin/env python
+#!/usr/bin/python -Es
+"""
+    This file is part of dumeter.net network traffic reporter for Linux.
+    Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
 
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+
+__copyright__ = "Copyright (c) 2014-2015 Hagel Technologies Ltd."
+__license__ = "MPL 2.0"
+__email__ = "support@hageltech.com"
+
+import sys
+import time
+import argparse
 import dumeter
 from dumeter.config import Config
 from dumeter.recordkeeper import RecordKeeper
 from dumeter.reporter import Reporter
 from dumeter.logger import logger
-import sys
-import time
-import argparse
 
 # setproctitle is nice, but optional.
 try:
@@ -16,7 +28,7 @@ except:
     def setproctitle(title):
         pass
 
-def main():
+if __name__ == "__main__":
     setproctitle(dumeter.NAME)
     # Parse command-line arguments
     parser = argparse.ArgumentParser()
@@ -33,6 +45,9 @@ def main():
         sys.exit(1)
     logger().info('%s %s has started successfully.' % (dumeter.NAME, dumeter.VERSION))
     try:
+        # Rationale: we're running either under systemd or upstart, and both can manage daemons
+        # No need to keep daemonizing code in the application itself, everything is done here and no forking.
+        # We're relying on systemd/upstart to close handles, etc.
         while 1:
             time.sleep(dumeter.SLEEP_BETWEEN_UPDATES)
             for reporter in reporters: reporter.update()
@@ -43,4 +58,3 @@ def main():
     except KeyboardInterrupt:
         sys.exit(0)
 
-main()

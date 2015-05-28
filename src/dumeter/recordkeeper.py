@@ -1,9 +1,17 @@
+"""
+    This file is part of dumeter.net network traffic reporter for Linux.
+    Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
 
-import dumeter
-from dumeter.logger import logger
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+
 import sys
 import sqlite3
 import datetime
+import dumeter
+from dumeter.logger import logger
 
 class RecordKeeper:
     """ This class keeps records in the database, for later submission to dumeter.net """
@@ -38,6 +46,8 @@ class RecordKeeper:
     # *****************************************************************************************************************
     def newdata(self, reporter, sent, recv):
         """ Add new record to the database """
+        if sent + recv == 0:
+            return
         dt = self.current_hour()
         # Warning: this code is obviously not thread- or multi-process safe!
         # Make sure only one caller is modifying the database
@@ -71,4 +81,3 @@ class RecordKeeper:
         else:
             self.con.execute('UPDATE stats SET reported=0 WHERE reported=1 AND reporter = ?', [reporter])
         self.con.commit()
-

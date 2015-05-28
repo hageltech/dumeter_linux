@@ -1,9 +1,17 @@
+"""
+    This file is part of dumeter.net network traffic reporter for Linux.
+    Copyright (c) Copyright (c) 2014-2015 Hagel Technologies Ltd.
 
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+
+import sys
 import dumeter
 from dumeter.logger import logger
 from dumeter.interfacecollector import InterfaceCollector
 from dumeter.dumeter_net import DuMeterNetSender
-import sys
 
 class Reporter:
     """ This class integrates the collection/reporting that is done in other classes """
@@ -28,6 +36,7 @@ class Reporter:
 
     # *****************************************************************************************************************
     def send_report(self):
+        """ Send report to dumeter.net """
         data = self.recordkeeper.to_report(self.name)
         if len(data) == 0:
             logger().warn('Nothing to report for reporter %s.' % self.name)
