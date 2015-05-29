@@ -1,13 +1,14 @@
 #!/bin/sh
 set -e
 
-. /usr/share/debconf/confmodule
-
 if [ "$1" = configure ]; then
-    if ! getent passwd dureporter >/dev/null; then
-        adduser --quiet --system --no-create-home --home /var/lib/dumeter-reporter --shell /usr/sbin/nologin dureporter
-        chown dureporter /var/lib/dumeter-reporter
-    fi
+
+    getent group dureporter >/dev/null 2>&1 || groupadd -r dureporter
+    getent passwd dureporter >/dev/null 2>&1 || \
+        useradd -r -g dureporter -d /var/lib/dumeter-reporter -s /sbin/nologin \
+            -c "dumeter.net reporter" dureporter >/dev/null 2>&1 || exit 1
+    chown -R dureporter:dureporter /var/lib/dumeter-reporter
+
 fi
 
 #DEBHELPER#
