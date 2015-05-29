@@ -67,4 +67,4 @@ class InterfaceCollector(object):
         self.recv = recv_new - self.recv_init
         self.sent_init = sent_new
         self.recv_init = recv_new
-        logger().debug('Updated stats for %s: sent=%d, recv=%d', self.device, self.sent, self.recv)
+        # logger().debug('Updated stats for %s: sent=%d, recv=%d', self.device, self.sent, self.recv)

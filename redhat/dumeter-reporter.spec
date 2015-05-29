@@ -47,7 +47,7 @@ getent group dureporter >/dev/null 2>&1 || groupadd -r dureporter
 getent passwd dureporter >/dev/null 2>&1 || \
     useradd -r -g dureporter -d /var/lib/dumeter-reporter -s /sbin/nologin \
     	-c "dumeter.net reporter" dureporter >/dev/null 2>&1 || exit 1
-chown -R dureporter:dureporter /var/lib/dumeter-reporter 2>&1
+chown -R dureporter:dureporter /var/lib/dumeter-reporter >/dev/null 2>&1
 exit 0
 
 %post
@@ -70,7 +70,7 @@ groupdel dureporter >/dev/null 2>&1 || true
 %config(noreplace) %{_sysconfdir}/dumeter-reporter.conf
 %{_sbindir}/dumeter-reporter
 %{_datarootdir}/dumeter-reporter/dumeter/*.py*
-%attr(0640,dureporter,dureporter) %dir /var/lib/dumeter-reporter
+%attr(0750,dureporter,dureporter) %dir /var/lib/dumeter-reporter
 
 %changelog
 
