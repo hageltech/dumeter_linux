@@ -42,7 +42,7 @@ class Reporter(object):
             logger().warn('Nothing to report for reporter %s.' % self.name)
             return False
         sender = DuMeterNetSender()
-        result = sender.report(self.config.dumeter_net_key(self.name), data)
+        result = sender.report(self.config, self.name, data)
         self.recordkeeper.update_reported(self.name, result)
         if result:
             logger().info('Reporting to dumeter.net for reporter %s was successful.', self.name)

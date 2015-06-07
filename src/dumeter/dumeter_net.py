@@ -23,22 +23,24 @@ class DuMeterNetSender(object):
         return self.PREFIX + urllib.urlencode({'token': token})
 
     # *****************************************************************************************************************
-    def __body(self, data):
+    def __body(self, data, moreinfo):
         """ Encode HTTP POST body for dumeter.net API call """
         params = {}
-        params['product'] = 'linux-dumeter-net-reporter'
+        params['product'] = 'du_linux'
         params['version'] = dumeter.VERSION
         params['data'] = data
         params['moreinfo'] = ''
         return urllib.urlencode(params)
 
     # *****************************************************************************************************************
-    def report(self, token, data):
-        """ sent data (which is expected to already be in CSV format) to dumeter.net, using the given token """
+    def report(self, config, name, data):
+        """ sent data (which is expected to already be in CSV format) to dumeter.net. """
         try:
+            token = config.dumeter_net_key(name)
+            moreinfo = "Interface: %s" % config.interface(name)
             if not token or (token == 'REPLACE-WITH-YOUR-DUMETER-NET-LINK-CODE'):
                 raise dumeter.DuMeterError('link_code in configuration file is not set. See configuration file for instructions.')
-            request = urllib2.Request(self.__url(token), self.__body(data))
+            request = urllib2.Request(self.__url(token), self.__body(data, moreinfo))
             handler = urllib2.urlopen(request)
             if handler.getcode() != 200:
                 raise dumeter.DuMeterError('Invalid reply from dumeter.net: %d' % handler.getcode())
