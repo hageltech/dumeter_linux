@@ -1,6 +1,6 @@
 %define name dumeter-reporter
 %define version 1.0
-%define release 1
+%define release 2
 
 Summary: Network bandwidth usage reporter for dumeter.net service.
 Name: %{name}
@@ -58,10 +58,13 @@ exit 0
 
 %postun
 %systemd_postun_with_restart dumeter-reporter.service
-rm -f /var/lib/dumeter-reporter/db.sqlite
-rmdir --ignore-fail-on-non-empty /var/lib/dumeter-reporter
-userdel dureporter >/dev/null 2>&1 || true
-groupdel dureporter >/dev/null 2>&1 || true
+if [ $1 -eq 0 ] ; then
+  # Not upgrade, uninstall
+  rm -f /var/lib/dumeter-reporter/db.sqlite
+  rmdir --ignore-fail-on-non-empty /var/lib/dumeter-reporter
+  userdel dureporter >/dev/null 2>&1 || true
+  groupdel dureporter >/dev/null 2>&1 || true
+fi
 
 %files
 %defattr(-,root,root)

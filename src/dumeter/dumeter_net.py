@@ -29,7 +29,7 @@ class DuMeterNetSender(object):
         params['product'] = 'du_linux'
         params['version'] = dumeter.VERSION
         params['data'] = data
-        params['moreinfo'] = ''
+        params['moreinfo'] = moreinfo
         return urllib.urlencode(params)
 
     # *****************************************************************************************************************
