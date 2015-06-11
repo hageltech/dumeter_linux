@@ -26,7 +26,7 @@ class DuMeterNetSender(object):
     def __body(self, data, moreinfo):
         """ Encode HTTP POST body for dumeter.net API call """
         params = {}
-        params['product'] = 'du_linux'
+        params['product'] = 'dnrl'
         params['version'] = dumeter.VERSION
         params['data'] = data
         params['moreinfo'] = moreinfo
