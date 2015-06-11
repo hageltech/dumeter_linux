@@ -1,5 +1,12 @@
-dumeter-reporter (1.0-2) trusty; urgency=low
+dumeter-reporter (1.0.2-4) trusty; urgency=low
 
-  * First Ubuntu release of dumeter-reporter
+  * First official release of the software.
 
- -- Haim Gelfenbeyn <admin@hageltech.com>  Thu, 28 May 2015 08:32:31 -0700
+ -- Haim Gelfenbeyn <admin@hageltech.com> Thu, 10 Jun 2015
+
+dumeter-reporter (1.0.0-1) trusty; urgency=low
+
+  * First private beta release of dumeter-reporter
+
+ -- Haim Gelfenbeyn <admin@hageltech.com> Thu, 28 May 2015
+

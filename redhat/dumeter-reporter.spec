@@ -1,6 +1,6 @@
 %define name dumeter-reporter
-%define version 1.0
-%define release 2
+%define version 1.0.2
+%define release 4
 
 Summary: Network bandwidth usage reporter for dumeter.net service.
 Name: %{name}
@@ -77,5 +77,9 @@ fi
 
 %changelog
 
+* Thu Jun 10 2015 Haim Gelfenbeyn <haim@hageltech.com>
+- First official release of the software.
+
 * Fri May 29 2015 Haim Gelfenbeyn <haim@hageltech.com>
-- Initial release of dumeter.net reporter for Linux.
+- Initial public beta release of dumeter.net reporter for Linux.
+

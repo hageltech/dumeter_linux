@@ -12,7 +12,7 @@ __license__ = "MPL 2.0"
 __email__ = "support@hageltech.com"
 
 NAME = 'dumeter-reporter'
-VERSION = '1.0'
+VERSION = '1.0.2'
 DB_VERSION = 1
 
 # Some common constants
