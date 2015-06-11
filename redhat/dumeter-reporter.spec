@@ -77,9 +77,9 @@ fi
 
 %changelog
 
-* Thu Jun 10 2015 Haim Gelfenbeyn <haim@hageltech.com>
+* Thu Jun 10 2015 Haim Gelfenbeyn <admin@hageltech.com>
 - First official release of the software.
 
-* Fri May 29 2015 Haim Gelfenbeyn <haim@hageltech.com>
+* Fri May 29 2015 Haim Gelfenbeyn <admin@hageltech.com>
 - Initial public beta release of dumeter.net reporter for Linux.
 

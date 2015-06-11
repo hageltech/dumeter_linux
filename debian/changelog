@@ -2,11 +2,10 @@ dumeter-reporter (1.0.2-4) trusty; urgency=low
 
   * First official release of the software.
 
- -- Haim Gelfenbeyn <admin@hageltech.com> Thu, 10 Jun 2015
+ -- Haim Gelfenbeyn <admin@hageltech.com>  Thu, 11 Jun 2015 08:12:23 -0700
 
 dumeter-reporter (1.0.0-1) trusty; urgency=low
 
   * First private beta release of dumeter-reporter
 
- -- Haim Gelfenbeyn <admin@hageltech.com> Thu, 28 May 2015
-
+ -- Haim Gelfenbeyn <admin@hageltech.com>  Thu, 28 May 2015 15:30:34 -0700
